@@ -1,4 +1,4 @@
-package co.edu.cesde.system_course_management.application.exceptions;
+package co.edu.cesde.system_course_management.domain.exceptions;
 
 public class StudentNotFoundException extends BusinessException {
 
