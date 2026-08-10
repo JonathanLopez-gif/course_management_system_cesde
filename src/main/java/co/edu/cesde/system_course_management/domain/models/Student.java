@@ -10,15 +10,15 @@ public class Student {
     private String email;
     private LocalDate birthDate;
 
+    public Student() {
+    }
+
     public Student(Long id, String firstName, String lastName, String email, LocalDate birthDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-    }
-
-    public Student() {
     }
 
     public Long getId() {

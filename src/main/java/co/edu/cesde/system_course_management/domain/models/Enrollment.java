@@ -10,15 +10,15 @@ public class Enrollment {
     private LocalDate enrollmentDate;
     private EnrollmentStatus status;
 
+    public Enrollment() {
+    }
+
     public Enrollment(Long id, Long studentId, Long courseId, LocalDate enrollmentDate, EnrollmentStatus status) {
         this.id = id;
         this.studentId = studentId;
         this.courseId = courseId;
         this.enrollmentDate = enrollmentDate;
         this.status = status;
-    }
-
-    public Enrollment() {
     }
 
     public Long getId() {

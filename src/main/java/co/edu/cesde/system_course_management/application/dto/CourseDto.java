@@ -1,21 +1,19 @@
-package co.edu.cesde.system_course_management.domain.models;
+package co.edu.cesde.system_course_management.application.dto;
 
-public class Course {
+public class CourseDto {
 
     private Long id;
     private String code;
     private String name;
-    private String description;
     private Integer maxCapacity;
 
-    public Course() {
+    public CourseDto() {
     }
 
-    public Course(Long id, String code, String name, String description, Integer maxCapacity) {
+    public CourseDto(Long id, String code, String name, Integer maxCapacity) {
         this.id = id;
         this.code = code;
         this.name = name;
-        this.description = description;
         this.maxCapacity = maxCapacity;
     }
 
@@ -43,31 +41,12 @@ public class Course {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Integer getMaxCapacity() {
         return maxCapacity;
     }
 
     public void setMaxCapacity(Integer maxCapacity) {
         this.maxCapacity = maxCapacity;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", maxCapacity=" + maxCapacity +
-                '}';
     }
 
 }

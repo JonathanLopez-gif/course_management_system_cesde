@@ -1,4 +1,4 @@
-package co.edu.cesde.system_course_management.presentation.console;
+package co.edu.cesde.system_course_management.presentation.menus;
 
 public class MainMenu {
 
