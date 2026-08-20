@@ -1,7 +1,7 @@
 package co.edu.cesde.cms.application.services;
 
 import co.edu.cesde.cms.application.repositories.StudentRepository;
-import co.edu.cesde.cms.domain.models.Student;
+import co.edu.cesde.cms.domain.models.StudentModel;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,19 +14,19 @@ public class StudentService {
         this.repository = repository;
     }
 
-    public Student create(Student student) {
+    public StudentModel create(StudentModel student) {
         return repository.save(student);
     }
 
-    public Optional<Student> getById(Long id) {
+    public Optional<StudentModel> getById(Long id) {
         return repository.findById(id);
     }
 
-    public List<Student> getAll() {
+    public List<StudentModel> getAll() {
         return repository.findAll();
     }
 
-    public Student update(Student student) {
+    public StudentModel update(StudentModel student) {
         return repository.update(student);
     }
 

@@ -1,16 +1,16 @@
 package co.edu.cesde.cms.shared;
 
-import co.edu.cesde.cms.domain.models.Course;
+import co.edu.cesde.cms.domain.models.CourseModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseInitialData {
 
-    public static List<Course> getCourses() {
-        List<Course> courses = new ArrayList<>();
+    public static List<CourseModel> getCourses() {
+        List<CourseModel> courses = new ArrayList<>();
 
-        courses.add(new Course(
+        courses.add(new CourseModel(
                 1L,
                 "JAVA-101",
                 "Java Fundamentals",
@@ -18,7 +18,7 @@ public class CourseInitialData {
                 30
         ));
 
-        courses.add(new Course(
+        courses.add(new CourseModel(
                 2L,
                 "SPR-201",
                 "Spring Boot",
@@ -26,7 +26,7 @@ public class CourseInitialData {
                 25
         ));
 
-        courses.add(new Course(
+        courses.add(new CourseModel(
                 3L,
                 "DB-301",
                 "Databases",

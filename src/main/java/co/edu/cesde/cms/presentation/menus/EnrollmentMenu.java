@@ -1,14 +1,14 @@
 package co.edu.cesde.cms.presentation.menus;
 
 import co.edu.cesde.cms.application.services.EnrollmentService;
-import co.edu.cesde.cms.domain.models.Enrollment;
+import co.edu.cesde.cms.domain.models.EnrollmentModel;
 
 import java.util.Scanner;
 
 public class EnrollmentMenu {
 
     private final EnrollmentService enrollmentService;
-    private Enrollment enrollment;
+    private EnrollmentModel enrollment;
 
     private final Scanner scanner = new Scanner(System.in);
 

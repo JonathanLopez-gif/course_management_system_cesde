@@ -1,18 +1,18 @@
-package co.edu.cesde.cms.infrastructure.repositories;
+package co.edu.cesde.cms.infrastructure.jpa.repositories;
 
 import co.edu.cesde.cms.application.repositories.StudentRepository;
-import co.edu.cesde.cms.domain.models.Student;
+import co.edu.cesde.cms.domain.models.StudentModel;
 import co.edu.cesde.cms.shared.StudentInitialData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class StudentRepositoryInMemory implements StudentRepository {
+public class JpaStudentRepository implements StudentRepository {
 
-    private final List<Student> storage = new ArrayList<>();
+    private final List<StudentModel> storage = new ArrayList<>();
 
-    public StudentRepositoryInMemory() {
+    public JpaStudentRepository() {
         loadInitialData();
     }
 
@@ -21,25 +21,25 @@ public class StudentRepositoryInMemory implements StudentRepository {
     }
 
     @Override
-    public Student save(Student student) {
+    public StudentModel save(StudentModel student) {
         storage.add(student);
         return student;
     }
 
     @Override
-    public Optional<Student> findById(Long id) {
+    public Optional<StudentModel> findById(Long id) {
         return storage.stream()
                 .filter(student -> student.getId().equals(id))
                 .findFirst();
     }
 
     @Override
-    public List<Student> findAll() {
+    public List<StudentModel> findAll() {
         return new ArrayList<>(storage);
     }
 
     @Override
-    public Student update(Student student) {
+    public StudentModel update(StudentModel student) {
         for (int i = 0; i < storage.size(); i++) {
             if (storage.get(i).getId().equals(student.getId())) {
                 storage.set(i, student);

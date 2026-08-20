@@ -1,18 +1,18 @@
-package co.edu.cesde.cms.infrastructure.repositories;
+package co.edu.cesde.cms.infrastructure.jpa.repositories;
 
 import co.edu.cesde.cms.application.repositories.EnrollmentRepository;
-import co.edu.cesde.cms.domain.models.Enrollment;
+import co.edu.cesde.cms.domain.models.EnrollmentModel;
 import co.edu.cesde.cms.shared.EnrollmentInitialData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class EnrollmentRepositoryInMemory implements EnrollmentRepository {
+public class JpaEnrollmentRepository implements EnrollmentRepository {
 
-    private final List<Enrollment> storage = new ArrayList<>();
+    private final List<EnrollmentModel> storage = new ArrayList<>();
 
-    public EnrollmentRepositoryInMemory() {
+    public JpaEnrollmentRepository() {
         loadInitialData();
     }
 
@@ -21,25 +21,25 @@ public class EnrollmentRepositoryInMemory implements EnrollmentRepository {
     }
 
     @Override
-    public Enrollment save(Enrollment enrollment) {
+    public EnrollmentModel save(EnrollmentModel enrollment) {
         storage.add(enrollment);
         return enrollment;
     }
 
     @Override
-    public Optional<Enrollment> findById(Long id) {
+    public Optional<EnrollmentModel> findById(Long id) {
         return storage.stream()
                 .filter(enrollment -> enrollment.getId().equals(id))
                 .findFirst();
     }
 
     @Override
-    public List<Enrollment> findAll() {
+    public List<EnrollmentModel> findAll() {
         return new ArrayList<>(storage);
     }
 
     @Override
-    public Enrollment update(Enrollment enrollment) {
+    public EnrollmentModel update(EnrollmentModel enrollment) {
         for (int i = 0; i < storage.size(); i++) {
             if (storage.get(i).getId().equals(enrollment.getId())) {
                 storage.set(i, enrollment);

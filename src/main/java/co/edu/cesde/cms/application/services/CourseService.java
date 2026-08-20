@@ -1,7 +1,7 @@
 package co.edu.cesde.cms.application.services;
 
 import co.edu.cesde.cms.application.repositories.CourseRepository;
-import co.edu.cesde.cms.domain.models.Course;
+import co.edu.cesde.cms.domain.models.CourseModel;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,19 +14,19 @@ public class CourseService {
         this.repository = repository;
     }
 
-    public Course create(Course course) {
+    public CourseModel create(CourseModel course) {
         return repository.save(course);
     }
 
-    public Optional<Course> getById(Long id) {
+    public Optional<CourseModel> getById(Long id) {
         return repository.findById(id);
     }
 
-    public List<Course> getAll() {
+    public List<CourseModel> getAll() {
         return repository.findAll();
     }
 
-    public Course update(Course course) {
+    public CourseModel update(CourseModel course) {
         return repository.update(course);
     }
 

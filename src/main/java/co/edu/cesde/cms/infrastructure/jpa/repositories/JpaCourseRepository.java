@@ -1,18 +1,18 @@
-package co.edu.cesde.cms.infrastructure.repositories;
+package co.edu.cesde.cms.infrastructure.jpa.repositories;
 
 import co.edu.cesde.cms.application.repositories.CourseRepository;
-import co.edu.cesde.cms.domain.models.Course;
+import co.edu.cesde.cms.domain.models.CourseModel;
 import co.edu.cesde.cms.shared.CourseInitialData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CourseRepositoryInMemory implements CourseRepository {
+public class JpaCourseRepository implements CourseRepository {
 
-    private final List<Course> storage = new ArrayList<>();
+    private final List<CourseModel> storage = new ArrayList<>();
 
-    public CourseRepositoryInMemory() {
+    public JpaCourseRepository() {
         loadInitialData();
     }
 
@@ -21,25 +21,25 @@ public class CourseRepositoryInMemory implements CourseRepository {
     }
 
     @Override
-    public Course save(Course course) {
+    public CourseModel save(CourseModel course) {
         storage.add(course);
         return course;
     }
 
     @Override
-    public Optional<Course> findById(Long id) {
+    public Optional<CourseModel> findById(Long id) {
         return storage.stream()
                 .filter(course -> course.getId().equals(id))
                 .findFirst();
     }
 
     @Override
-    public List<Course> findAll() {
+    public List<CourseModel> findAll() {
         return new ArrayList<>(storage);
     }
 
     @Override
-    public Course update(Course course) {
+    public CourseModel update(CourseModel course) {
         for (int i = 0; i < storage.size(); i++) {
             if (storage.get(i).getId().equals(course.getId())) {
                 storage.set(i, course);

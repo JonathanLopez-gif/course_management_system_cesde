@@ -2,7 +2,7 @@ package co.edu.cesde.cms.domain.models;
 
 import java.time.LocalDate;
 
-public class Student {
+public class StudentModel {
 
     private Long id;
     private String firstName;
@@ -10,10 +10,10 @@ public class Student {
     private String email;
     private LocalDate birthDate;
 
-    public Student() {
+    public StudentModel() {
     }
 
-    public Student(Long id, String firstName, String lastName, String email, LocalDate birthDate) {
+    public StudentModel(Long id, String firstName, String lastName, String email, LocalDate birthDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

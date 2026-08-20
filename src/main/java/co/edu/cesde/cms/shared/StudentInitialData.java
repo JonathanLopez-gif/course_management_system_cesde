@@ -1,6 +1,6 @@
 package co.edu.cesde.cms.shared;
 
-import co.edu.cesde.cms.domain.models.Student;
+import co.edu.cesde.cms.domain.models.StudentModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,10 +8,10 @@ import java.util.List;
 
 public class StudentInitialData {
 
-    public static List<Student> getStudents() {
-        List<Student> students = new ArrayList<>();
+    public static List<StudentModel> getStudents() {
+        List<StudentModel> students = new ArrayList<>();
 
-        students.add(new Student(
+        students.add(new StudentModel(
                 1L,
                 "Juan",
                 "Pérez",
@@ -19,7 +19,7 @@ public class StudentInitialData {
                 LocalDate.of(2000, 5, 10)
         ));
 
-        students.add(new Student(
+        students.add(new StudentModel(
                 2L,
                 "Ana",
                 "Gómez",
@@ -27,7 +27,7 @@ public class StudentInitialData {
                 LocalDate.of(2001, 8, 15)
         ));
 
-        students.add(new Student(
+        students.add(new StudentModel(
                 3L,
                 "Carlos",
                 "Ruiz",

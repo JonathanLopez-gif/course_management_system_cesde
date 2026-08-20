@@ -1,17 +1,17 @@
 package co.edu.cesde.cms.application.repositories;
 
-import co.edu.cesde.cms.domain.models.Course;
+import co.edu.cesde.cms.domain.models.CourseModel;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CourseRepository {
 
-    Course save(Course course);
+    CourseModel save(CourseModel course);
     boolean existsById(Long id);
-    Optional<Course> findById(Long id);
-    List<Course> findAll();
-    Course update(Course course);
+    Optional<CourseModel> findById(Long id);
+    List<CourseModel> findAll();
+    CourseModel update(CourseModel course);
     void deleteById(Long id);
 
 }

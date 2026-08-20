@@ -1,14 +1,14 @@
 package co.edu.cesde.cms.presentation.menus;
 
 import co.edu.cesde.cms.application.services.CourseService;
-import co.edu.cesde.cms.domain.models.Course;
+import co.edu.cesde.cms.domain.models.CourseModel;
 
 import java.util.Scanner;
 
 public class CourseMenu {
 
     private final CourseService courseService;
-    private Course course;
+    private CourseModel course;
 
     private final Scanner scanner = new Scanner(System.in);
 

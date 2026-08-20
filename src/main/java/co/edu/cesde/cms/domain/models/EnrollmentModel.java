@@ -2,7 +2,7 @@ package co.edu.cesde.cms.domain.models;
 
 import java.time.LocalDate;
 
-public class Enrollment {
+public class EnrollmentModel {
 
     private Long id;
     private Long studentId;
@@ -10,10 +10,10 @@ public class Enrollment {
     private LocalDate enrollmentDate;
     private EnrollmentStatus status;
 
-    public Enrollment() {
+    public EnrollmentModel() {
     }
 
-    public Enrollment(Long id, Long studentId, Long courseId, LocalDate enrollmentDate, EnrollmentStatus status) {
+    public EnrollmentModel(Long id, Long studentId, Long courseId, LocalDate enrollmentDate, EnrollmentStatus status) {
         this.id = id;
         this.studentId = studentId;
         this.courseId = courseId;

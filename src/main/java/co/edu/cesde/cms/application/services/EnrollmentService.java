@@ -1,7 +1,7 @@
 package co.edu.cesde.cms.application.services;
 
 import co.edu.cesde.cms.application.repositories.EnrollmentRepository;
-import co.edu.cesde.cms.domain.models.Enrollment;
+import co.edu.cesde.cms.domain.models.EnrollmentModel;
 import co.edu.cesde.cms.domain.models.EnrollmentStatus;
 
 import java.util.List;
@@ -15,23 +15,23 @@ public class EnrollmentService {
         this.repository = repository;
     }
 
-    public Enrollment createEnrollment(Enrollment enrollment) {
+    public EnrollmentModel createEnrollment(EnrollmentModel enrollment) {
         return repository.save(enrollment);
     }
 
-    public Optional<Enrollment> getById(Long id) {
+    public Optional<EnrollmentModel> getById(Long id) {
         return repository.findById(id);
     }
 
-    public List<Enrollment> getAll() {
+    public List<EnrollmentModel> getAll() {
         return repository.findAll();
     }
 
-    public Enrollment cancelEnrollment(Long id) {
-        Optional<Enrollment> optionalEnrollment = repository.findById(id);
+    public EnrollmentModel cancelEnrollment(Long id) {
+        Optional<EnrollmentModel> optionalEnrollment = repository.findById(id);
 
         if (optionalEnrollment.isPresent()) {
-            Enrollment enrollment = optionalEnrollment.get();
+            EnrollmentModel enrollment = optionalEnrollment.get();
             enrollment.setStatus(EnrollmentStatus.CANCELED);
             return repository.update(enrollment);
         }
