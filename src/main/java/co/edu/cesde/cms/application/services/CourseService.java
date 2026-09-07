@@ -1,42 +1,59 @@
 package co.edu.cesde.cms.application.services;
 
-import co.edu.cesde.cms.application.repositories.CourseRepository;
-import co.edu.cesde.cms.domain.models.CourseModel;
+import co.edu.cesde.cms.domain.exceptions.CourseNotFoundException;
+import co.edu.cesde.cms.infrastructure.entities.CourseEntity;
+import co.edu.cesde.cms.infrastructure.repositories.CourseJpaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CourseService {
 
-    private final CourseRepository repository;
+    private final CourseJpaRepository courseRepository;
 
-    public CourseService(CourseRepository repository) {
-        this.repository = repository;
+    public CourseService(CourseJpaRepository courseRepository) {
+        this.courseRepository = courseRepository;
     }
 
-    public CourseModel create(CourseModel course) {
-        return repository.save(course);
+    public CourseEntity save(CourseEntity course) {
+        return courseRepository.save(course);
     }
 
-    public Optional<CourseModel> getById(Long id) {
-        return repository.findById(id);
+    public boolean existsById(Long id) {
+        return courseRepository.existsById(id);
     }
 
-    public List<CourseModel> getAll() {
-        return repository.findAll();
+    public Optional<CourseEntity> findById(Long id) {
+        return courseRepository.findById(id);
     }
 
-    public CourseModel update(CourseModel course) {
-        return repository.update(course);
+    public List<CourseEntity> findAll() {
+        return courseRepository.findAll();
     }
 
-    public boolean delete(Long id) {
-        repository.deleteById(id);
-        return false;
+    public CourseEntity update(Long id, CourseEntity course) {
+
+        CourseEntity existingCourse = courseRepository.findById(id)
+                .orElseThrow(() ->
+                        new CourseNotFoundException(id)
+                );
+
+        existingCourse.setName(course.getName());
+        existingCourse.setDescription(course.getDescription());
+        existingCourse.setMaxCapacity(course.getMaxCapacity());
+
+        return courseRepository.save(existingCourse);
     }
 
-    public boolean exists(Long id) {
-        return repository.existsById(id);
+    public void deleteById(Long id) {
+
+        if (!courseRepository.existsById(id)) {
+            throw new CourseNotFoundException(id);
+        }
+
+        courseRepository.deleteById(id);
     }
 
 }

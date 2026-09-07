@@ -1,11 +1,14 @@
 spring:
+
   application:
     name: course_management_system
+
   datasource:
     url: jdbc:mysql://localhost:3306/course_management_system?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: jonathan_lopez
     password: "1036929175#2026"
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,3 +17,16 @@ spring:
       hibernate:
         format_sql: true
 
+springdoc:
+  swagger-ui:
+    # Habilita el botón "Try it out" automáticamente en todos los endpoints
+    try-it-out-enabled: true
+    # Especifica qué métodos HTTP permiten interacción (si está vacío, bloquea todo)
+    supported-submit-methods:
+      - get
+      - put
+      - post
+      - delete
+      - options
+      - head
+      - patch

@@ -1,47 +1,59 @@
 package co.edu.cesde.cms.application.services;
 
-import co.edu.cesde.cms.application.repositories.EnrollmentRepository;
-import co.edu.cesde.cms.domain.models.EnrollmentModel;
-import co.edu.cesde.cms.domain.models.EnrollmentStatus;
+import co.edu.cesde.cms.domain.exceptions.EnrollmentNotFoundException;
+import co.edu.cesde.cms.infrastructure.entities.EnrollmentEntity;
+import co.edu.cesde.cms.infrastructure.repositories.EnrollmentJpaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
+@Service
 public class EnrollmentService {
 
-    private final EnrollmentRepository repository;
+    private final EnrollmentJpaRepository enrollmentRepository;
 
-    public EnrollmentService(EnrollmentRepository repository) {
-        this.repository = repository;
+    public EnrollmentService(EnrollmentJpaRepository enrollmentRepository) {
+        this.enrollmentRepository = enrollmentRepository;
     }
 
-    public EnrollmentModel createEnrollment(EnrollmentModel enrollment) {
-        return repository.save(enrollment);
+    public EnrollmentEntity save(EnrollmentEntity enrollment) {
+        return enrollmentRepository.save(enrollment);
     }
 
-    public Optional<EnrollmentModel> getById(Long id) {
-        return repository.findById(id);
+    public boolean existsById(UUID id) {
+        return enrollmentRepository.existsById(id);
     }
 
-    public List<EnrollmentModel> getAll() {
-        return repository.findAll();
+    public Optional<EnrollmentEntity> findById(UUID id) {
+        return enrollmentRepository.findById(id);
     }
 
-    public EnrollmentModel cancelEnrollment(Long id) {
-        Optional<EnrollmentModel> optionalEnrollment = repository.findById(id);
+    public List<EnrollmentEntity> findAll() {
+        return enrollmentRepository.findAll();
+    }
 
-        if (optionalEnrollment.isPresent()) {
-            EnrollmentModel enrollment = optionalEnrollment.get();
-            enrollment.setStatus(EnrollmentStatus.CANCELED);
-            return repository.update(enrollment);
+    public EnrollmentEntity update(UUID id, EnrollmentEntity enrollment) {
+
+        EnrollmentEntity existingEnrollment = enrollmentRepository.findById(id)
+                .orElseThrow(() ->
+                        new EnrollmentNotFoundException(id)
+                );
+
+        existingEnrollment.setStudent(enrollment.getStudent());
+        existingEnrollment.setCourse(enrollment.getCourse());
+
+        return enrollmentRepository.save(existingEnrollment);
+    }
+
+    public void deleteById(UUID id) {
+
+        if (!enrollmentRepository.existsById(id)) {
+            throw new EnrollmentNotFoundException(id);
         }
 
-        return null;
-    }
-
-    public boolean deleteEnrollment(Long id) {
-        repository.deleteById(id);
-        return false;
+        enrollmentRepository.deleteById(id);
     }
 
 }

@@ -1,8 +1,10 @@
 package co.edu.cesde.cms.domain.exceptions;
 
-public class EnrollmentNotFoundException extends BusinessException {
+import java.util.UUID;
 
-    public EnrollmentNotFoundException(Long id) {
+public class EnrollmentNotFoundException extends RuntimeException {
+
+    public EnrollmentNotFoundException(UUID id) {
         super("Enrollment with id " + id + " not found");
     }
 

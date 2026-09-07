@@ -1,15 +1,11 @@
-package co.edu.cesde.cms.infrastructure.jpa.entities;
+package co.edu.cesde.cms.infrastructure.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.*;
+import java.util.*;
 
 @Entity
 @Table(name = "courses")
@@ -24,19 +20,19 @@ public class CourseEntity {
     @Column(name = "course_id")
     private Long id;
 
-    @NotEmpty
+    @NotBlank
     @Column(name = "code", unique = true, nullable = false, length = 100)
     private String code;
 
-    @NotEmpty
-    @Column(name = "name")
+    @NotBlank
+    @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @NotEmpty
-    @Column(name = "description")
+    @NotBlank
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @NotBlank
+    @NotNull
     @Min(value = 15, message = "El mínimo de capacidad del curso debe ser al menos 15")
     @Max(value = 30, message = "El máximo de capacidad del curso debe ser máximo de 30")
     @Column(name = "max_capacity")
@@ -60,8 +56,17 @@ public class CourseEntity {
         this.name = name;
         this.description = description;
         this.maxCapacity = maxCapacity;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 
 }

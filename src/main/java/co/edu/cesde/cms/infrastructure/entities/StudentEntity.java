@@ -1,19 +1,12 @@
-package co.edu.cesde.cms.infrastructure.jpa.entities;
+package co.edu.cesde.cms.infrastructure.entities;
 
 import co.edu.cesde.cms.domain.models.EnrollmentStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.*;
+import java.util.*;
 
 @Entity
 @Table(name = "students")
@@ -24,17 +17,18 @@ import java.util.List;
 public class StudentEntity {
 
     @Id
-    @Column(name = "student_id")
+    @Column(name = "student_id", nullable = false)
     private Long id;
 
-    @NotEmpty
+    @NotBlank
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
-    @NotEmpty
+    @NotBlank
     @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
 
+    @NotBlank
     @Email
     @Column(name = "email", unique = true, nullable = false, length = 150)
     private String email;
@@ -42,7 +36,8 @@ public class StudentEntity {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "enrollment_status")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "enrollment_status", nullable = false, length = 20)
     private EnrollmentStatus enrollmentStatus;
 
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -64,9 +59,21 @@ public class StudentEntity {
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-        this.enrollmentStatus = EnrollmentStatus.ACTIVE;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+
+        if (enrollmentStatus == null) {
+            enrollmentStatus = EnrollmentStatus.ACTIVE;
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 
 }
